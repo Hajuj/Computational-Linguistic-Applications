@@ -3,7 +3,7 @@ from nltk import word_tokenize
 
 
 def dot(dictA, dictB):
-    return 0  # TODO: Ex. 2: return vector product between features vectors represented by dictA and dictB.
+    return sum(dictA[key]*dictB.get(key, 0) for key in dictA)
 
 
 def normalized_tokens(text):
@@ -20,7 +20,8 @@ class DataInstance:
     def from_list_of_feature_occurrences(cls, feature_list, label):
         """ Creates feature counts for all features in the list."""
         feature_counts = dict()
-        # TODO: Ex. 3: create a dictionary that contains for each feature in the list the count how often it occurs.
+        for occ in feature_list:
+            feature_counts[occ] = feature_counts.get(occ,0)+1
         return cls(feature_counts, label)
 
     @classmethod
