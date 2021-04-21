@@ -42,9 +42,9 @@ class Dataset:
         """ This returns a set with the n most frequently occurring features (i.e. the features that are contained in 
         most instances). """
         feature_count = Counter()
-        for instance in self.instance_list:
-            feature_count.update(instance.feature_counts.keys())
-        return {f_c[0] for f_c in feature_count.most_common(n)}
+        for x in self.instance_list:
+            feature_count.update(x.feature_counts.keys())
+        return {x[0] for x in feature_count.most_common(n)}
 
     def set_feature_set(self, feature_set):
         """
