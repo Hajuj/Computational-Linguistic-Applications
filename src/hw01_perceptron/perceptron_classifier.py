@@ -40,11 +40,11 @@ class PerceptronClassifier:
         Return a boolean value indicating whether an update was performed.
         """
         predicted_output = self.prediction(instance.feature_counts)
-        error = 0  # TODO: Ex. 7: Replace 0 with the correct calculation of the error
+        error = predicted_output - instance.label
         do_update = error != 0
         if do_update:
             for feature, count in instance.feature_counts.items():
-                pass  # TODO: Ex. 7: Replace pass with update of feature weights
+                self.weights[feature] = self.weights[feature] - error * instance.feature_counts[feature]
         return do_update
 
     def training_iteration(self, dataset):
