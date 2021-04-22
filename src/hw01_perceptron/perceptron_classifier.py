@@ -88,7 +88,17 @@ class PerceptronClassifier:
         """
         Calculate f_measure of classifier for a labelled dataset and a specified label.
         """
-        return 0  # TODO: Do the prediction for a given data set, and return the f-measure for a label of interest.
+        tp, fn, fp = 0, 0, 0
+        for instance in dataset.instance_list:
+            if for_label == instance.label == self.prediction(instance.feature_counts):
+                tp += 1
+            elif for_label != instance.label == self.prediction(instance.feature_counts):
+                fn += 1
+            elif for_label != instance.label != self.prediction(instance.feature_counts):
+                fp += 1
+        rec = tp / (tp + fn)
+        prec = tp / (tp + fp)
+        return 2 * rec * prec / (rec + prec) if rec + prec != 0 else 0
 
     def copy(self):
         """
