@@ -10,7 +10,7 @@ def square_roots(start, end, length):
     >>> square_roots(4,9,3)
     array([2.        , 2.54950976, 3.        ])
     """
-    pass  # TODO: Exercise 2.1
+    return np.sqrt(np.linspace(start, end, length))
 
 
 def odd_ones_squared(rows, cols):
@@ -23,4 +23,5 @@ def odd_ones_squared(rows, cols):
            [ 25,   6,  49,   8,  81],
            [ 10, 121,  12, 169,  14]])
     """
-    pass  # TODO: Exercise 2.2
+    a = np.arange(rows*cols).reshape(rows,cols)
+    return np.power(a, 2, out=a, where=a % 2 == 1)
