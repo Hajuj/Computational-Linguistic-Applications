@@ -1,10 +1,9 @@
 import random
-from collections import Counter
 from nltk import word_tokenize
 
 
 def dot(dictA, dictB):
-    return sum(dictA[key]*dictB.get(key, 0) for key in dictA)
+    return 0  # TODO: Ex. 2: return vector product between features vectors represented by dictA and dictB.
 
 
 def normalized_tokens(text):
@@ -21,8 +20,7 @@ class DataInstance:
     def from_list_of_feature_occurrences(cls, feature_list, label):
         """ Creates feature counts for all features in the list."""
         feature_counts = dict()
-        for occ in feature_list:
-            feature_counts[occ] = feature_counts.get(occ,0)+1
+        # TODO: Ex. 3: create a dictionary that contains for each feature in the list the count how often it occurs.
         return cls(feature_counts, label)
 
     @classmethod
@@ -41,39 +39,19 @@ class Dataset:
     def get_topn_features(self, n):
         """ This returns a set with the n most frequently occurring features (i.e. the features that are contained in 
         most instances). """
-        feature_count = Counter()
-        for x in self.instance_list:
-            feature_count.update(x.feature_counts.keys())
-        return {x[0] for x in feature_count.most_common(n)}
+        return set()  # TODO: Ex. 4: Return set of features that occur in most instances.
 
     def set_feature_set(self, feature_set):
         """
         This restricts the feature set. Only features in the specified set all retained. All other feature are removed
         from all instances in the dataset AND from the feature set."""
-        self.feature_set = self.feature_set.intersection(feature_set)
-        for inst in self.instance_list:
-            copy_dict = inst.feature_counts.copy()
-            for feature in inst.feature_counts.keys():
-                if feature not in feature_set:
-                    del copy_dict[feature]
-            inst.feature_counts = copy_dict
+        # TODO: Ex. 5: Filter features according to feature set.
+        pass
 
     def most_frequent_sense_accuracy(self):
         """ Computes the accuracy of always predicting the overall most frequent sense for all instances in the 
         dataset. """
-        label_count = dict()
-        for inst in self.instance_list:
-            if inst.label not in label_count.keys():
-                label_count[inst.label] = 1
-            else:
-                label_count[inst.label] += 1
-        max = 0
-        all = 0
-        for key, value in label_count.items():
-            all += value
-            max = value if value > max else max
-
-        return max / all if all != 0 else 0.0
+        return 0.0  # TODO: Ex. 6: Return accuracy of always predicting most frequent label in data set.
 
     def shuffle(self):
         """ Shuffles the dataset. Beneficial for some learning algorithms."""
