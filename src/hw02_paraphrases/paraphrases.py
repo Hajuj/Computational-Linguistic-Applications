@@ -53,6 +53,9 @@ def character_ngram_features(ngrams1, ngrams2):
 def wordpair_features(tokens1, tokens2):
     features = dict()
     # TODO Exercise 1.5
+    for t1 in tokens1:
+        for t2 in tokens2:
+            features[t1 + "#" + t2] = 1
     return features
 
 
