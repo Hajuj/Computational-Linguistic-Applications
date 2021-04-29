@@ -22,24 +22,31 @@ def character_ngrams(text, n):
 def token_ngrams(tokens, n):
     """ Returns a list of lists with n-grams."""
     # TODO Exercise 1.1
-    return []
+    ngrams = [tokens[token:token+n] for token in range(len(tokens)-n+1)]
+    return [' '.join(ngram) for ngram in ngrams]
 
 
 def token_features(tokens1, tokens2):
     features = dict()
     #  TODO Exercise 1.2
+    features[WORD_OVERLAP] = len(tokens1.intersection(tokens2))
+    features[WORD_UNION] = len(tokens1.union(tokens2))
     return features
 
 
 def word_ngram_features(ngrams1, ngrams2):
     features = dict()
     # TODO Exercise 1.3
+    features[WORD_NGRAM_OVERLAP] = len(ngrams1.intersection(ngrams2))
+    features[WORD_NGRAM_UNION] = len(ngrams1.union(ngrams2))
     return features
 
 
 def character_ngram_features(ngrams1, ngrams2):
     features = dict()
     # TODO Exercise 1.4
+    features[CHARACTER_NGRAM_OVERLAP] = len(ngrams1.intersection(ngrams2))
+    features[CHARACTER_NGRAM_UNION] = len(ngrams1.union(ngrams2))
     return features
 
 
