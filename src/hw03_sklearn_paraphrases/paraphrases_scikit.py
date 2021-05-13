@@ -70,12 +70,10 @@ def paraphrases_to_dataset(filename, vectorizer=None):
             features.update(wordpair_features(tokens1, tokens2))
             list_of_feature_dicts.append(features)
     if not vectorizer:
-        # 3.1 vectorizer = DictVectorizer().fit(list_of_feature_dicts)
-        pass
-    pass
+        vectorizer = DictVectorizer().fit(list_of_feature_dicts)
     # TODO: Uncomment the following line and replace the one below:
-    # return feature_matrix, list_of_labels, vectorizer
-    return None, None, None  # <- REPLACE
+    feature_matrix = vectorizer.transform(list_of_feature_dicts)
+    return feature_matrix, list_of_labels, vectorizer
 
 
 def readData(trainpath, devpath, testpath):
@@ -89,7 +87,7 @@ def readData(trainpath, devpath, testpath):
 def paraphrases_classifier_accuracy(train_file, dev_file, test_file, verbose=False):
     """Trains two classifiers and computes dev accuracies.
     The best classifier is selected and its accuracy on the test set is computed"""
-    return -1, -1, -1  # TODO: uncomment or delete for Ex 3.3
+    # return -1, -1, -1  # TODO: uncomment or delete for Ex 3.3
     train_X, train_Y, dev_X, dev_Y, test_X, test_Y = readData(train_file, dev_file, test_file)
     lr_list = [(LogisticRegression(C=0.01, penalty="l2"), 'LogisticRegression(C=0.01, penalty="l2")'),
                (LogisticRegression(C=0.1, penalty="l2"), 'LogisticRegression(C=0.1, penalty="l2")'),
@@ -109,7 +107,7 @@ def paraphrases_classifier_accuracy(train_file, dev_file, test_file, verbose=Fal
     best_classifier_name = None
 
     for cl, cl_name in classifiers_with_names:
-        cl.fit(train_X,train_Y)
+        cl.fit(train_X, train_Y)
         dev_accuracy = accuracy_score(dev_Y, cl.predict(dev_X))
         if verbose:
             print("Classifier: %s - Development Accuracy: %.4f" % (cl_name, dev_accuracy))
