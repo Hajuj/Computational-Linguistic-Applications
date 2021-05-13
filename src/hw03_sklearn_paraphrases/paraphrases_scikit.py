@@ -70,7 +70,7 @@ def paraphrases_to_dataset(filename, vectorizer=None):
             features.update(wordpair_features(tokens1, tokens2))
             list_of_feature_dicts.append(features)
     if not vectorizer:
-        # TODO Ex.3.1
+        # 3.1 vectorizer = DictVectorizer().fit(list_of_feature_dicts)
         pass
     pass
     # TODO: Uncomment the following line and replace the one below:
@@ -80,11 +80,10 @@ def paraphrases_to_dataset(filename, vectorizer=None):
 
 def readData(trainpath, devpath, testpath):
     """Creates feature matrices from filenames"""
-    # TODO Ex 3.2
-    pass
-    # TODO: Uncomment the following line and replace the one below:
-    # return train_X, train_Y, dev_X, dev_Y, test_X, test_Y
-    return None, None, None, None, None, None  # <- REPLACE
+    train_X, train_Y, vectorizer = paraphrases_to_dataset(trainpath, None)
+    dev_X, dev_Y, _ = paraphrases_to_dataset(devpath, vectorizer)
+    test_X, test_Y, _ = paraphrases_to_dataset(testpath, vectorizer)
+    return train_X, train_Y, dev_X, dev_Y, test_X, test_Y
 
 
 def paraphrases_classifier_accuracy(train_file, dev_file, test_file, verbose=False):
@@ -110,7 +109,7 @@ def paraphrases_classifier_accuracy(train_file, dev_file, test_file, verbose=Fal
     best_classifier_name = None
 
     for cl, cl_name in classifiers_with_names:
-        # TODO Ex 3.3
+        cl.fit(train_X,train_Y)
         dev_accuracy = accuracy_score(dev_Y, cl.predict(dev_X))
         if verbose:
             print("Classifier: %s - Development Accuracy: %.4f" % (cl_name, dev_accuracy))
