@@ -89,6 +89,7 @@ def ppmi_weight(cooc_matrix):
     ppmi_matrix = lil_matrix(cooc_matrix.shape)
     rows, cols = cooc_matrix.nonzero()
     for row, col in zip(rows, cols):
-        pass
-    # TODO: Exercise 3: calculate PPMI, and store result in ppmi_matrix
+        # TODO: Exercise 3: calculate PPMI, and store result in ppmi_matrix
+        ppmi_matrix[row, col] = max(0, math.log(((cooc_matrix[row, col]) / sum_total) / ((sum_in_row[row,0]/sum_total) * (sum_in_col[0,col]/sum_total))))
     return ppmi_matrix
+
