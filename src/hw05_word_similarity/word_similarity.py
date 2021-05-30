@@ -1,5 +1,7 @@
 import math
 import numpy as np
+from hw05_word_similarity.cooccurrence import vocabulary_from_wordlist, cooccurrences, cooc_dict_to_matrix, ppmi_weight
+
 
 
 class DenseSimilarityMatrix:
@@ -55,14 +57,15 @@ class PpmiWeightedSparseMatrix:
         """
         # TODO: Exercise 2.1
         # define the vocabulary
+        vocab = vocabulary_from_wordlist(word_list, vocab_size)
         # get co-occurrences dict
+        cooc_dict = cooccurrences(word_list, window_size, vocab)
         # create word matrix, word to column and column to word mapping
         # Apply PPMI weighting to the word matrix
         # (Use the class attribute names accessed in other class methods)
-        self.word_matrix = None  # TODO: Ex 2.1
-        self.word_to_id = {}  # TODO
-        self.id_to_word = {}  # TODO
-        pass  # TODO
+        self.word_matrix, self.word_to_id = cooc_dict_to_matrix(cooc_dict, vocab)
+        self.id_to_word = dict((x, y) for y, x in self.word_to_id.items())
+        self.word_matrix = ppmi_weight(self.word_matrix)
 
     def toSvdSimilarityMatrix(self, n_components):
         """ Computes truncated SVD with only n columns retained."""
