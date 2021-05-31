@@ -70,7 +70,8 @@ class PpmiWeightedSparseMatrix:
     def toSvdSimilarityMatrix(self, n_components):
         """ Computes truncated SVD with only n columns retained."""
         # TODO: Exercise 2.2
-        return None
+        svd = TruncatedSVD(n_components=n_components)
+        return DenseSimilarityMatrix(svd.fit_transform(self.word_matrix), self.word_to_id)
 
     def similarities_of_word(self, word):
         """ Computes cosine similarity between one query word and all words in the vocabulary. Efficient
