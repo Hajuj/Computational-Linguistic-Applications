@@ -1,5 +1,7 @@
 import math
 import numpy as np
+from sklearn.decomposition import TruncatedSVD
+
 from hw05_word_similarity.cooccurrence import vocabulary_from_wordlist, cooccurrences, cooc_dict_to_matrix, ppmi_weight
 
 
@@ -69,7 +71,6 @@ class PpmiWeightedSparseMatrix:
 
     def toSvdSimilarityMatrix(self, n_components):
         """ Computes truncated SVD with only n columns retained."""
-        # TODO: Exercise 2.2
         svd = TruncatedSVD(n_components=n_components)
         return DenseSimilarityMatrix(svd.fit_transform(self.word_matrix), self.word_to_id)
 
@@ -79,14 +80,14 @@ class PpmiWeightedSparseMatrix:
         row = self.word_to_id[word]
         vec = self.word_matrix[row, :]
         m = self.word_matrix
-        dot_m_v = None  # vector # TODO: Exercise 2.3
-        dot_m_m = None  # vector # TODO
-        dot_v_v = None  # float # TODO
-        return dot_m_v / (math.sqrt(dot_v_v) * np.sqrt(dot_m_m))
+        dot_m_v = np.dot(m, vec.T)
+        dot_m_m = (m.multiply(m)).sum(axis=1)
+        dot_v_v = vec.dot(vec.T)[0, 0]
+        return (dot_m_v / (math.sqrt(dot_v_v) * np.sqrt(dot_m_m))).A1
 
     def most_similar_words(self, word, n):
         """ Returns a list of n words with the greatest similarities to the given word."""
         if word not in self.word_to_id:
             return []
-        sims = None  # TODO: Exercise 2.3
+        sims = self.similarities_of_word(word)
         return [self.id_to_word[id] for id in (-sims).argsort()[:n]]
