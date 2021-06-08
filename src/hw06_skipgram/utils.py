@@ -14,7 +14,7 @@ def vocabulary_to_id_for_wordlist(word_list, vocab_size):
 
 def sigmoid(x):
     """ Calculates the logistic sigmoid function."""
-    return -1  # TODO: Replace & Exercise 2.
+    return 1/(1+math.exp(-x))
 
 
 def positive_and_negative_cooccurrences(tokens, max_distance, neg_samples_factor, vocab_to_id):
