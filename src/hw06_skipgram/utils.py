@@ -5,7 +5,11 @@ from collections import Counter
 
 def vocabulary_to_id_for_wordlist(word_list, vocab_size):
     """ Returns a mapping from word to id for vocab_size most frequent words in a list. """
-    return None  # TODO: Replace & Exercise 1.
+    count = Counter(word_list).most_common(vocab_size)
+    res_dict = dict()
+    for i, x in enumerate(count):
+        res_dict[x[0]] = i
+    return res_dict
 
 
 def sigmoid(x):
