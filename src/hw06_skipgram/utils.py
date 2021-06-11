@@ -37,7 +37,16 @@ def positive_and_negative_cooccurrences(tokens, max_distance, neg_samples_factor
     :param vocab_to_id: dictionary (string to int) mapping each word to its id (=row in embedding matrizes).
     :return: generator over tuples of the form (target_word_id:int, context_word_id:int, label:boolean)
     """
-    return None  # TODO: Exercise 3.
+    for mid_pos in range(len(tokens)):
+        target_word = tokens[mid_pos]
+        context_word_start = max(0, mid_pos - max_distance)
+        context_word_end = min(mid_pos + max_distance + 1, len(tokens))
+        for context_pos in range(context_word_start, context_word_end):
+            if context_pos is not mid_pos:
+                yield vocab_to_id[target_word], vocab_to_id[tokens[context_pos]], True
+                for i in range(0, neg_samples_factor):
+                    random_index = random.randint(0, len(vocab_to_id) - 1)
+                    yield vocab_to_id[target_word], random_index, False
 
 
 class DenseSimilarityMatrix:
