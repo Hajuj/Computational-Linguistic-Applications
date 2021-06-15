@@ -1,0 +1,109 @@
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+OK
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+OK
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+F
+======================================================================
+FAIL: test_04_skipgram_update_1 (hw06_skipgram.test_skipgram.Test_word_similarity)
+Tests whether update on positive tuple is performed correctly.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File .../tmp_repositories/abgabe/hw06_skipgram/ProgrammierGruppe03/src/hw06_skipgram/test_skipgram.py", line 114, in test_04_skipgram_update_1
+    self.assertTrue((sg.context_word_matrix[0] == expected_updated).all())
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (failures=1)
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+E
+======================================================================
+ERROR: test_03_negative_samples_0_hidden (hw06_skipgram.test_skipgram_hidden.Test_word_similarity)
+Tests whether positive tuples are created correctly.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File .../tmp_repositories/abgabe/hw06_skipgram/ProgrammierGruppe03/src/hw06_skipgram/test_skipgram_hidden.py", line 34, in test_03_negative_samples_0_hidden
+    with_negatives = list(pos_neg_cooccurrences)
+  File .../tmp_repositories/abgabe/hw06_skipgram/ProgrammierGruppe03/src/hw06_skipgram/utils.py", line 46, in positive_and_negative_cooccurrences
+    yield vocab_to_id[target_word], vocab_to_id[tokens[context_pos]], True
+KeyError: '5'
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (errors=1)
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+OK
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+F
+======================================================================
+FAIL: test_04_skipgram_update_hidden (hw06_skipgram.test_skipgram_hidden.Test_word_similarity)
+Tests whether update on positive tuple is performed correctly.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File .../tmp_repositories/abgabe/hw06_skipgram/ProgrammierGruppe03/src/hw06_skipgram/test_skipgram_hidden.py", line 111, in test_04_skipgram_update_hidden
+    self.assertAlmostEqual(ll, -0.313, delta=0.001)
+AssertionError: -0.6931471805599453 != -0.313 within 0.001 delta (0.3801471805599453 difference)
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (failures=1)
